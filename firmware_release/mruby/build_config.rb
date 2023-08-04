@@ -160,7 +160,8 @@ MRuby::CrossBuild.new("RX630") do |conf|
   base_path = case RbConfig::CONFIG['host_os']
                 when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
                   # Windows
-                  "/cygdrive/c/Renesas/GNURXv14.03-ELF/rx-elf/rx-elf/"
+                  #"/cygdrive/c/Renesas/GNURXv14.03-ELF/rx-elf/rx-elf/"
+                  "C:/ide4gr-1.14/hardware/tools/gcc-rx/rx-elf/rx-elf/"
                 when /darwin|mac os/
                   # macOS
                   "/Applications/IDE4GR.app/Contents/Java/hardware/tools/gcc-rx/rx-elf/rx-elf/"
