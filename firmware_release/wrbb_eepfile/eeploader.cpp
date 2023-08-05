@@ -47,7 +47,6 @@ void lineinput(char *arry)
 	int len = 0;
 	int k = 0;
 	arry[len] = 0;
-	int loopCnt = 0;
 
 	k = USB_Serial->read();
 	DEBUG_PRINT("0:USB_Serial->read", k);

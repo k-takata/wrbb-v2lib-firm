@@ -8,6 +8,7 @@
  *
  */
 #include <Arduino.h>
+#undef F_CPU	// Suppress redefinition warning
 #include <MsTimer2.h>
 #include <WavMp3p.h>
 

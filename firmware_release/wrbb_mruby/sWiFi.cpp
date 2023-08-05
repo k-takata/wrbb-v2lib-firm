@@ -70,7 +70,7 @@ int getData(unsigned int wait_msec)
 			return 0;
 		}
 
-		while (len = RbSerial[WIFI_SERIAL]->available())
+		while ((len = RbSerial[WIFI_SERIAL]->available()) != 0)
 		{
 			//DEBUG_PRINT("len=",len);
 			//DEBUG_PRINT("n=",n);
@@ -1680,7 +1680,7 @@ mrb_value mrb_wifi_postSD(mrb_state *mrb, mrb_value self)
 			break;
 		}
 
-		while (len = RbSerial[WIFI_SERIAL]->available())
+		while ((len = RbSerial[WIFI_SERIAL]->available()) != 0)
 		{
 			for (int i = 0; i < len; i++) {
 				RbSerial[WIFI_SERIAL]->read();
@@ -1875,7 +1875,7 @@ mrb_value mrb_wifi_post(mrb_state *mrb, mrb_value self)
 			break;
 		}
 
-		while (len = RbSerial[WIFI_SERIAL]->available())
+		while ((len = RbSerial[WIFI_SERIAL]->available()) != 0)
 		{
 			for (int i = 0; i < len; i++) {
 				RbSerial[WIFI_SERIAL]->read();
@@ -1950,7 +1950,7 @@ mrb_value mrb_wifi_serverSD(mrb_state *mrb, mrb_value self)
 					break;
 				}
 
-				while (len = RbSerial[WIFI_SERIAL]->available())
+				while ((len = RbSerial[WIFI_SERIAL]->available()) != 0)
 				{
 					for (int i = 0; i < len; i++) {
 						recv[0] = (unsigned char)RbSerial[WIFI_SERIAL]->read();
