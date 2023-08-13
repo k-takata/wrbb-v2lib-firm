@@ -82,7 +82,9 @@ make = make --no-print-directory
 
 all:	rom
 
-rom:	$(OBJS) $(MAKEFILE)
+rom:	$(TARGET).bin
+
+$(TARGET).bin:	$(OBJS) $(MAKEFILE)
 	$(LNK) $(OBJS) $(LFLAGS) -o ./gr_build/$(TARGET).x
 	$(CNVB) ./gr_build/$(TARGET).x  $(TARGET).bin
 	$(CNVS) ./gr_build/$(TARGET).x  ./gr_build/$(TARGET).mot
