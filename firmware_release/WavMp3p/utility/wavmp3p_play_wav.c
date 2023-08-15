@@ -33,7 +33,7 @@ char *wavmp3p_play_wav(const char *name)
 	FRESULT res;
 	UINT size;
 	unsigned long chunk_size;
-	short read_buffer[2*1024];
+	unsigned int read_buffer[1024];
 
 #define filename name
 
@@ -63,7 +63,7 @@ char *wavmp3p_play_wav(const char *name)
 	res = f_read((void *)read_buffer, 4, &size);
 	sprintf(message, "wavmp3p_play_wav error file[%s] line:%d, f_read:%d\r\n", __FILE__, __LINE__, res);
 	if(res != FR_OK) goto play_return;
-	unsigned long n = *(unsigned long *)read_buffer;
+	unsigned int n = *(unsigned int *)read_buffer;
 	if(0 == n)goto play_return;
 
 	res = f_read((void *)read_buffer, n, &size);
@@ -77,7 +77,7 @@ char *wavmp3p_play_wav(const char *name)
 	if((2 != ch) && (1 != ch))goto play_return;
 
 	// サンプリング周波数
-	unsigned long sf = *((unsigned long *)read_buffer + 1);
+	unsigned int sf = *((unsigned int *)read_buffer + 1);
 	sprintf(message, "wavmp3p_play_wav error file[%s] line:%d, sf:%d\r\n", __FILE__, __LINE__, (int)sf);
 
 	// ビット数チェック
@@ -96,7 +96,7 @@ char *wavmp3p_play_wav(const char *name)
 	res = f_read((void *)read_buffer, 4, &size);
 	sprintf(message, "wavmp3p_play_wav error file[%s] line:%d, f_read:%d\r\n", __FILE__, __LINE__, res);
 	if(res != FR_OK) goto play_return;
-	chunk_size = *(unsigned long *)read_buffer;
+	chunk_size = *(unsigned int *)read_buffer;
 	if(0 == chunk_size)goto play_return;
 
 	// 読み出したパラメータをセット

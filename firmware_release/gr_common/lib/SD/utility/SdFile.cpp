@@ -883,7 +883,7 @@ uint8_t SdFile::rmRfStar(void) {
     SdFile f;
 
     // remember position
-    uint16_t index = curPosition_/32;
+    uint32_t index = curPosition_/32;
 
     dir_t* p = readDirCache();
     if (!p) return false;
@@ -897,7 +897,7 @@ uint8_t SdFile::rmRfStar(void) {
     // skip if part of long file name or volume label in root
     if (!DIR_IS_FILE_OR_SUBDIR(p)) continue;
 
-    if (!f.open(this, index, O_READ)) return false;
+    if (!f.open(this, (uint16_t)index, O_READ)) return false;
     if (f.isSubDir()) {
       // recursively delete
       if (!f.rmRfStar()) return false;

@@ -180,6 +180,7 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop
           if((wire_channel == 8) && (i == 0)){
               while(!RIIC0.ICSR2.BIT.RDRF);
               char b = RIIC0.ICDRR; // dummy read
+              (void)b;
           }
           i2c_rxBuffer[wire_channel][i] = twi_rx_read(
                   g_sci_i2c_channel_table[wire_channel], i == (quantity - 1));

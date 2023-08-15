@@ -316,7 +316,7 @@ int free_bitrate(struct mad_stream *stream, struct mad_header const *header)
  * NAME:	header->decode()
  * DESCRIPTION:	read the next frame header from the stream
  */
-#if 0 //wavmp3p
+#if 1 //wavmp3p
 #include "wavmp3p_play_mp3.h"
 #endif
 int mad_header_decode(struct mad_header *header, struct mad_stream *stream)

@@ -27,7 +27,8 @@
 extern int decode(unsigned char const *start, unsigned long length);
 
 #define MP3_WORK_SIZE (1152*2*2)
-static unsigned char mp3_work[MP3_WORK_SIZE];
+static int mp3_buff[MP3_WORK_SIZE / sizeof(int)];
+static unsigned char *mp3_work = (unsigned char *)mp3_buff;
 static unsigned char *next_header;
 
 static char message[256];
@@ -141,7 +142,7 @@ void read_frame(unsigned int N)
 	return;
 
 read_frame_error:
-	*(int*)mp3_work = 0;
+	*(int*)mp3_buff = 0;
 	next_header = mp3_work;
 	return;
 }

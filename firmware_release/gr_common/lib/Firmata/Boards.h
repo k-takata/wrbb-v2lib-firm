@@ -360,7 +360,7 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 #endif
 
 // as long this is not defined for all boards:
-#ifndef IS_PIN_SPI(p)
+#ifndef IS_PIN_SPI
 #define IS_PIN_SPI(p)           0
 #endif
 
@@ -394,8 +394,8 @@ static inline unsigned char readPort(byte port, byte bitmask)
  * writePort() - Write an 8 bit port, only touch pins specified by a bitmask
  *============================================================================*/
 
-static inline unsigned char writePort(byte, byte, byte) __attribute__((always_inline, unused));
-static inline unsigned char writePort(byte port, byte value, byte bitmask)
+static inline void writePort(byte, byte, byte) __attribute__((always_inline, unused));
+static inline void writePort(byte port, byte value, byte bitmask)
 {
 #if defined(ARDUINO_PINOUT_OPTIMIZE)
 	if (port == 0) {

@@ -2125,7 +2125,7 @@ mrb_value mrb_wifi_server(mrb_state *mrb, mrb_value self)
 	if (n < 1) {
 		if (RbSerial[WIFI_SERIAL]->available() > 0) {
 			unsigned char recv[256];
-			unsigned char c;
+			unsigned char c = 0;
 			bool rwriteFlg = true;
 			bool snmFlg = false;
 			bool crnFlg = false;
@@ -2541,7 +2541,7 @@ mrb_value mrb_wifi_ntp(mrb_state *mrb, mrb_value self)
 		((uint32_t)ntp_recv[42] << 8) +
 		((uint32_t)ntp_recv[43] << 0);
 
-	time -= 2208988800;	// conversion to Unixtime
+	time -= 2208988800u;	// conversion to Unixtime
 
 	if (n == 2) {
 		time += local * 3600;

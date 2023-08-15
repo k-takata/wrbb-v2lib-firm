@@ -162,6 +162,7 @@ uint8_t twi_rx_read(uint8_t channel, uint8_t last) {
             RIIC0.ICSR2.BIT.STOP = 0;
             RIIC0.ICCR2.BIT.SP = 1;
             char temp = RIIC0.ICDRR;
+            (void)temp;
             while(RIIC0.ICSR2.BIT.STOP == 0);
             //for next transfer
             RIIC0.ICSR2.BIT.NACKF = 0;
@@ -266,6 +267,7 @@ bool twi_rx_write(uint8_t channel, uint8_t data) {
             while(!RIIC0.ICSR2.BIT.TEND){}
             if(RIIC0.ICSR2.BIT.NACKF){
                 char temp = RIIC0.ICDRR; // dummy read
+                (void)temp;
                 while(!RIIC0.ICSR2.BIT.STOP); // wait for stop condition
                 //for next transfer
                 RIIC0.ICSR2.BIT.NACKF = 0;
@@ -345,6 +347,7 @@ void INT_Excep_RIIC0_RXI0(void){
     if(RIIC0.ICCR2.BIT.MST == 0){ // slave mode
         twi_rxBufferIndex = 0;
         char b = RIIC0.ICDRR; // dummy read
+        (void)b;
         while(!RIIC0.ICSR2.BIT.STOP){ // detect stop condition
             while(!RIIC0.ICSR2.BIT.RDRF); // wait for data
             if(twi_rxBufferIndex < TWI_BUFFER_LENGTH){
