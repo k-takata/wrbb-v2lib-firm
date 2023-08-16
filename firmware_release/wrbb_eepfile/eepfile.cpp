@@ -256,12 +256,26 @@ FILEEEP *fdst = &fdstj;
 		return -1;
 	}
 
+	int i = (strlen(dstfilename) + 1 + 2) & 0x1f;
+	int offset = i;
+	char buf[32];
 	int dat = fread(fsrc);
+	int len;
 
 	while(dat >= 0){
-		fwrite(fdst, (char)dat);
+		buf[i] = (char)dat;
+		if (++i == 32) {
+			len = i - offset;
+			fwrite(fdst, buf + offset, &len);
+			i = 0;
+			offset = 0;
+		}
 		dat = fread(fsrc);
-	}	
+	}
+	len = i - offset;
+	if (len > 0) {
+		fwrite(fdst, buf + offset, &len);
+	}
 
 	fclose(fdst);
 	fclose(fsrc);
